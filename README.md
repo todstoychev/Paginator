@@ -33,7 +33,7 @@ Where ```$items_per_page``` is the count of the items shown per page.
 ```$param``` is the column name which to sort.
 ```$page``` is the current page.
 
-Template helpers: 
+##Template helpers: 
 
 For each one helper the uri parameter must be in the following format:
 '/controller_name/action_name' 
