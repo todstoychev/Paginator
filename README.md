@@ -1,4 +1,5 @@
 Paginator is a Codeigniter spark used to provide pagination.
+This spark is still alpha and it is not well tested.
 Paginator has a dropdown select for the items per page functionality. And it is necessary to use jQuery in case you want to use it.
 Paginator has a table_header which provides the table header for the data. Also sortable columns are available and Bootstrap 3 support.  
 
@@ -22,8 +23,12 @@ In your codeigniter_project/application/config/autoload.php declare the usage of
         // Set translation file/files
         // This helper can accept array of filenames
         set_translation_file('translation_file', 'language');
+
+        // You can use both - pure string or active record 
+        // I preffer to use string, because active record does not work well
+        $query = "SELECT * FROM table_name";
         
-        $data = get_data($this->db->where(['param1' => 'something1', 'param2' => 'something2']), 'table_name', $items_per_page, $page, $order_direction, $param);
+        $data = get_data($query, 'table_name', $items_per_page, $page, $order_direction, $param);
 
         $this->load->view('template', ['data' => $data, 'order_direction' => $order_direction, 'items_per_page' => (int)$items_per_page, 'page' => $page, 'param' => $param]);
     }
