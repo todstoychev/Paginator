@@ -22,18 +22,16 @@ In your codeigniter_project/application/config/autoload.php declare the usage of
         // Set translation file/files
         // This helper can accept array of filenames
         set_translation_file('translation_file', 'language');
-
-        // Creates the query and returns the data for the database.
-        // As first argument put your initial query.
-        // Second argument is the part from the uri that represents your 
-        // controller name. 
         
         $data = get_data($this->db->where(['param1' => 'something1', 'param2' => 'something2']), 'table_name', $items_per_page, $page, $order_direction, $param);
 
         $this->load->view('template', ['data' => $data, 'order_direction' => $order_direction, 'items_per_page' => (int)$items_per_page, 'page' => $page, 'param' => $param]);
     }
     
-    where
+Where ```$items_per_page``` is the count of the items shown per page. 
+```$order_direction``` is the direction in which to order the column. 
+```$param``` is the column name which to sort.
+```$page``` is the current page.
 
 Template helpers: 
 
