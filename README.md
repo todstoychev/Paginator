@@ -1,17 +1,18 @@
 Paginator is a Codeigniter spark used to provide pagination.
-This spark is still alpha and it is not well tested.
-Paginator has a dropdown select for the items per page functionality. And it is necessary to use jQuery in case you want to use it.
-Paginator has a table_header which provides the table header for the data. Also sortable columns are available and Bootstrap 3 support.  
+This spark is still beta and it is not well tested.
+Paginator has a dropdown select for the items per page functionality. And it is necessary to use jQuery in case you want to use it. There is also a script in the assets forlder that handles the items per page form submission.
+Paginator has a table_header helper which provides the table header for the data table. Also sortable columns are available and Bootstrap 3 support.  
 
-#Installation
+# Installation
 Download or clone the project in your codegniter_project/sparks directory.
+You need also the sparks module installed. For more info see [here](http://getsparks.org/install).
 Rename the base directory from Paginator-master to Paginator if necessary.
 In your codeigniter_project/application/config/autoload.php declare the usage of this spark:
     
-    $['autoload'] = ['Paginator/x.x.x'];
+    $autoload['sparks'] = ['Paginator/x.x.x'];
 
-#Basic usage
-##Controller:
+# Basic usage
+## Controller:
     
     public function my_method($items_per_page = 10, $page = 1, $order_direction = 'desc', $param = null) {
         
@@ -34,17 +35,19 @@ In your codeigniter_project/application/config/autoload.php declare the usage of
     }
     
 Where ```$items_per_page``` is the count of the items shown per page. 
-```$order_direction``` is the direction in which to order the column. 
+
+```$order_direction``` is the direction in which to order the column.
+ 
 ```$param``` is the column name which to sort.
+
 ```$page``` is the current page.
 
-##Template helpers: 
+## Template helpers: 
 
 For each one helper the uri parameter must be in the following format:
-'/controller_name/action_name' 
+'controller_name/action_name' 
 
-=========================
-	table_header($columns, $items_per_page = 10, $page = 1, $order = 'desc', $uri = null)
+    table_header($columns, $items_per_page = 10, $page = 1, $order = 'desc', $uri = null)
 
 Accepts array of columns in the format:
 array('<column_name_in_the_table>' => array('<column_name_to_show>', [<sortable>])) .
@@ -63,30 +66,28 @@ Example:
 	</table>
 
 =========================
-	items_per_page($uri, $items_per_page, $attr = [])
 
-Creates a dropdown with items per values. Those values can be set in the spark's
-config file. See $config['items_per_page'] .
-First argument got to be this part from the uri that represents the controller 
-name. If your route is http://example.com/my_controller/my_action, put as first
-argument 'my_controller'.
-The secont argument is the current items per page value.
-Third argument is array with attributes for the items per page form, 
+    items_per_page($uri, $items_per_page, $attr = [])
+
+Creates a dropdown with items per page values. Those values can be set in the spark's
+config file. See ```$config['items_per_page']``` .
+The first argument is the uri of the controller - 'my_controller/my_action'
+The second argument is the current items per page value.
+The third argument is array with attributes for the items per page form, 
 e.g. ['class' => 'my_css_class', 'id' => 'my_css_id'].
 
 There is a javascript file that provides the functionality for the dropdown.
 You can find it in the assets folder of the spark (Paginator/x.x.x/assets/js/paginator.js). 
 
 ========================
-	pagination($items_per_page, $uri, $page = 1, $order = null, $param = null)
+    
+    pagination($items_per_page, $uri, $page = 1, $order = null, $param = null)
 
 Creates pager links. The pager is Bootstrap 3 ready.
 
-First argument is the current items per page value.
-Second argument got to be this part from the uri that represents the controller 
-and the action ('/controller_name/action') name. 
-If your route is http://example.com/my_controller/my_action, put as first
-argument 'my_controller'.
-Third argument is the current page number.
-Fourth argument represents the order direction - 'asc' or 'desc'.
-Fifth argument is the database table column name that is sorted. 
+The first argument is the current items per page value.
+The second argument got to be this part from the uri that represents the controller 
+and the action ('controller_name/action_name'). 
+The third argument is the current page number.
+The fourth argument represents the order direction - 'asc' or 'desc'.
+The fifth argument is the database table column name that is sorted. 

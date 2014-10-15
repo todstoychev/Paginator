@@ -30,7 +30,7 @@ class paginator {
      * @param string $order Order direction
      * @param string $uri URI to the controller
      */
-    public function set_table_header($columns, $items_per_page = 10, $page = 1, $order = 'desc', $uri = null) {
+    public function set_table_header($columns, $items_per_page = 10, $page = 1, $order = null, $uri = null) {
         echo '<tr>';
         foreach ($columns as $key => $value) {
             echo '<th>';
@@ -82,16 +82,18 @@ class paginator {
      * @param string $order Order direction
      * @param string $uri URI to the controller
      */
-    private function th($column_name, $column, $sortable = false, $items_per_page = 10, $page = 1, $order = 'desc', $uri = null) {
+    private function th($column_name, $column, $sortable = false, $items_per_page = 10, $page = 1, $order = null, $uri = null) {
+        
         if (isset($sortable) && $sortable != false) {
-            $order = $this->order($order);
-            echo '<a href="' . site_url() . str_replace('//', '/', $uri . '/' . $items_per_page . '/' . $page . '/' . $order . '/' . $column_name) . '">' . $this->trans($column) . '</a>';
+            echo '<a href="' . base_url() . str_replace('//', '/', $uri . '/' . $items_per_page . '/' . $page . '/' . $this->order($order) . '/' . $column_name) . '">' . $this->trans($column) . '</a>';
         } else {
             echo $this->trans($column);
         }
     }
 
     public function query($query, $table, $items_per_page, $page, $order, $param) {
+        $order = $this->order($order);
+        
         // Calculate the offset
         if ($page == 1) {
             $offset = 0;
@@ -140,7 +142,7 @@ class paginator {
      * @param string $order Order direction
      * @return string Order direction
      */
-    private function order($order = 'desc') {
+    private function order($order) {
         if ($order == 'desc' || $order == 'DESC') {
             return $order = 'asc';
         } else {
