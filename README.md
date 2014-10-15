@@ -42,6 +42,8 @@ Where ```$items_per_page``` is the count of the items shown per page.
 
 ```$page``` is the current page.
 
+Use string based queries. You can use also the active record class and his methods, but keep in mind that this method is a little bit buggy and does not give good results. This will be fixed in the future.
+
 ## Template helpers: 
 
 For each one helper the uri parameter must be in the following format:
