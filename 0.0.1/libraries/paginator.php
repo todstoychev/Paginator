@@ -178,28 +178,28 @@ class paginator {
      * @param string $order Order direction
      * @param string $param Column from the database to sort
      */
-    public function get_pagination($items_per_page, $uri, $page = 1, $order = null, $param = null) {
+    public function get_pagination($items_per_page, $uri, $page, $order = null, $param = null) {
         $pages = ceil($this->count / $items_per_page);
 
         // First page link
         if ($page > 1 && $pages > 1) {
             echo '<ul class="pagination">';
-            echo '<li><a href="' . site_url() . str_replace('//', '/' . $uri . '/' . $items_per_page . '/1/' . $order . '/' . $param) . '">&laquo;</a></li>';
-            echo '<li><a href="' . site_url() . str_replace('//' . '/' . $uri . '/' . $items_per_page . '/' . ($page - 1) . '/' . $order . '/' . $param) . '">&lsaquo;</li>';
-        } elseif ($pages > 1 ) {
+            echo '<li><a href="' . site_url() . str_replace('//', '/', $uri . '/' . $items_per_page . '/1/' . $order . '/' . $param) . '">&laquo;</a></li>';
+            echo '<li><a href="' . site_url() . str_replace('//', '/', $uri . '/' . $items_per_page . '/' . ($page - 1) . '/' . $order . '/' . $param) . '">&lsaquo;</li>';
+        } elseif ($pages > 1 && $page == 1) {
             echo '<ul class="pagination">';
             echo '<li class="disabled"><a href="#">&laquo;</a></li>';
             echo '<li class="disabled"><a href="#">&lsaquo;</li>';
         }
 
-        if ($pages > 12) {
+        if ($pages > 13) {
 
             $this->first_three($items_per_page, $uri, $page, $order, $param, $pages);
 
             $this->middle($items_per_page, $uri, $page, $order, $param, $pages);
 
             $this->last_three($items_per_page, $uri, $page, $order, $param, $pages);
-        } elseif ($pages > 1 && $pages <= 12) {
+        } elseif ($pages > 1 && $pages <= 13) {
             for ($i = 1; $i <= $pages; $i++) {
                 $this->active($i, $page);
                 echo '<a href="' . site_url() . str_replace('//', '/', $uri . '/' . $items_per_page . '/' . $i . '/' . $order . '/' . $param) . '">' . $i . '</a>';
@@ -265,31 +265,31 @@ class paginator {
      */
     private function middle($items_per_page, $uri, $page, $order, $param, $pages) {
         if ($page >= 1 && $page <= 6) {
-            echo '<li><a href="#">...</a></li>';
+            echo '<li class="disabled"><a href="#">...</a></li>';
             for ($i = 4; $i < 9; $i++) {
                 $this->active($i, $page);
                 echo '<a href="' . site_url() . str_replace('//', '/', $uri . '/' . $items_per_page . '/' . $i . '/' . $order . '/' . $param) . '">' . $i . '</a>';
                 echo '</li>';
             }
-            echo '<li><a href="#">...</a></li>';
+            echo '<li class="disabled"><a href="#">...</a></li>';
         } elseif ($page > 6 && $page <= $pages - 6) {
-            echo '<li><a href="#">...</a></li>';
+            echo '<li class="disabled"><a href="#">...</a></li>';
             for ($i = $page - 2; $i < $page + 3; $i++) {
                 $this->active($i, $page);
                 echo '<a href="' . site_url() . str_replace('//', '/',  $uri . '/' . $items_per_page . '/' . $i . '/' . $order . '/' . $param) . '">' . $i . '</a>';
                 echo '</li>';
             }
-            echo '<li><a href="#">...</a></li>';
-        } elseif ($page <= $pages && $page > 12) {
-            echo '<li><a href="#">...</a></li>';
+            echo '<li class="disabled"><a href="#">...</a></li>';
+        } elseif ($page <= $pages) {
+            echo '<li class="disabled"><a href="#">...</a></li>';
             for ($i = $pages - 7; $i < $pages - 2; $i++) {
                 $this->active($i, $page);
-                echo '<a href="' . site_url() . str_replace('//', '/' . $uri . '/' . $items_per_page . '/' . $i . '/' . $order . '/' . $param) . '">' . $i . '</a>';
+                echo '<a href="' . site_url() . str_replace('//', '/', $uri . '/' . $items_per_page . '/' . $i . '/' . $order . '/' . $param) . '">' . $i . '</a>';
                 echo '</li>';
             }
-            echo '<li><a href="#">...</a></li>';
+            echo '<li class="disabled"><a href="#">...</a></li>';
         } else {
-            echo '<li><a href="#">...</a></li>';
+            echo '<li class="disabled"><a href="#">...</a></li>';
         }
     }
 

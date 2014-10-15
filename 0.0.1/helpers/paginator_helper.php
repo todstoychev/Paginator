@@ -81,7 +81,7 @@ function items_per_page($uri, $items_per_page, $attr = []) {
  * @param string $order Order direction
  * @param string $param Column from the database to sort
  */
-function pagination($items_per_page, $uri, $page = 1, $order = null, $param = null) {
+function pagination($items_per_page, $uri, $page, $order = null, $param = null) {
     $CI = & get_instance();
     $CI->paginator->get_pagination($items_per_page, $uri, $page, $order, $param);
 }
