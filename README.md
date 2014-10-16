@@ -3,6 +3,8 @@ This spark is still beta and it is not well tested.
 Paginator has a dropdown select for the items per page functionality. And it is necessary to use jQuery in case you want to use it. There is also a script in the assets forlder that handles the items per page form submission.
 Paginator has a table_header helper which provides the table header for the data table. Also sortable columns are available and Bootstrap 3 support.  
 
+You can test the project [here](http://paginator.todsto.eu).
+
 # Installation
 Download or clone the project in your codegniter_project/sparks directory.
 You need also the sparks module installed. For more info see [here](http://getsparks.org/install).
